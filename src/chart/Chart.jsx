@@ -71,10 +71,17 @@ export default function Chart() {
         <tbody>
           {data &&
             data.data?.map((item) => {
+              const class1h =
+                item.quote.USD.percent_change_1h > 0 ? styles.Up : styles.Down;
+              const class24h =
+                item.quote.USD.percent_change_24h > 0 ? styles.Up : styles.Down;
+              const class7d =
+                item.quote.USD.percent_change_7d > 0 ? styles.Up : styles.Down;
+
               return (
                 <tr key={item.id} className={styles.DataRow}>
                   <td className={styles.Data}>
-                    <span className="ion-ios-star-outline"></span>
+                    <span className="ion-ios-star-outline" />
                   </td>
 
                   <th className={styles.Data} scope="row">
@@ -91,20 +98,24 @@ export default function Chart() {
                     </div>
                   </td>
 
-                  <td className={styles.Data}>
-                    <span>${item.quote.USD.price.toFixed(2)}</span>
+                  <td className={styles.Data}>${item.quote.USD.price.toFixed(2)}</td>
+
+                  <td className={`${styles.Data} ${class1h}`}>
+                    <span className={`${class1h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                      &nbsp;{item.quote.USD.percent_change_1h.toFixed(2)}%
+                    </span>
                   </td>
 
-                  <td className={`${styles.Data}`}>
-                    {item.quote.USD.percent_change_1h.toFixed(2)}%
+                  <td className={`${styles.Data} ${class24h}`}>
+                    <span className={`${class24h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                      &nbsp;{item.quote.USD.percent_change_24h.toFixed(2)}%
+                    </span>
                   </td>
 
-                  <td className={`${styles.Data}`}>
-                    {item.quote.USD.percent_change_24h.toFixed(2)}%
-                  </td>
-
-                  <td className={`${styles.Data}`}>
-                    {item.quote.USD.percent_change_7d.toFixed(2)}%
+                  <td className={`${styles.Data} ${class7d}`}>
+                    <span className={`${class7d == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                      &nbsp;{item.quote.USD.percent_change_7d.toFixed(2)}%
+                    </span>
                   </td>
 
                   <td className={styles.Data}>${item.quote.USD.market_cap.toFixed(0)}</td>
