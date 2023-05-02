@@ -1,0 +1,53 @@
+.Table {
+  min-width: 75%;
+
+}
+
+.Heading {
+  font-size: 1.4rem;
+}
+
+.DataRow {
+  transition: var(--transition);
+
+  border: 0.1px solid var(--line-color);
+  border-left: none; border-right: none;
+
+}
+.DataRow:hover {
+  background-color: var(--background-hover);
+}
+.Heading,
+.Data {
+  padding: 1em;
+}
+
+.Data {
+  text-align: right;
+}
+
+.Heading {
+  white-space: nowrap;
+}
+
+.Heading {
+  text-align: right;
+}
+
+.Name {
+  text-align: left;
+}
+
+.Symbol {
+  color: var(--label-color);
+}
+
+.Row:not(.Title) {
+  height: 90px;
+}
+
+.Table .CoinName {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
