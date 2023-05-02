@@ -11,14 +11,19 @@
   border: 0.1px solid var(--line-color);
   border-left: none;
   border-right: none;
-
 }
-.DataRow:hover {
+
+.DataRow:hover{
   background-color: var(--background-hover);
 }
-.Heading,
-.Data {
+
+.Heading:not(:last-child),
+.Data:not(:last-child) {
   padding: 1em;
+}
+
+.Data:last-child {
+  padding: 1em 1.25em;
 }
 
 .Data {
