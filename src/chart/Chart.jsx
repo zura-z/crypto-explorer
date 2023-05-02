@@ -22,7 +22,23 @@ export default function Chart() {
   }
 
   function removeDash(str) {
-    return str.replace(/-/g, '');
+    return str.replace(/-/g, "");
+  }
+
+  function addCommas(numString) {
+    const isDecimal = numString.includes(".");
+
+    // Split the number into whole and decimal parts
+    const [wholePart, decimalPart] = numString.split(".");
+
+    const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    // Join the whole and decimal parts together with a dot (if decimal exists)
+    const formattedNumber = isDecimal
+      ? `${formattedWholePart}.${decimalPart}`
+      : formattedWholePart;
+
+    return formattedNumber;
   }
 
   return (
@@ -102,32 +118,44 @@ export default function Chart() {
                     </div>
                   </td>
 
-                  <td className={styles.Data}>${item.quote.USD.price.toFixed(2)}</td>
+                  <td className={styles.Data}>${addCommas(item.quote.USD.price.toFixed(2))}</td>
 
                   <td className={`${styles.Data} ${class1h}`}>
-                    <span className={`${class1h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                    <span
+                      className={`${
+                        class1h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"
+                      }`}
+                    >
                       &nbsp;{removeDash(item.quote.USD.percent_change_1h.toFixed(2))}%
                     </span>
                   </td>
 
                   <td className={`${styles.Data} ${class24h}`}>
-                    <span className={`${class24h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                    <span
+                      className={`${
+                        class24h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"
+                      }`}
+                    >
                       &nbsp;{removeDash(item.quote.USD.percent_change_24h.toFixed(2))}%
                     </span>
                   </td>
 
                   <td className={`${styles.Data} ${class7d}`}>
-                    <span className={`${class7d == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
+                    <span
+                      className={`${
+                        class7d == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"
+                      }`}
+                    >
                       &nbsp;{removeDash(item.quote.USD.percent_change_7d.toFixed(2))}%
                     </span>
                   </td>
 
-                  <td className={styles.Data}>${item.quote.USD.market_cap.toFixed(0)}</td>
+                  <td className={styles.Data}>${addCommas(item.quote.USD.market_cap.toFixed(0))}</td>
 
-                  <td className={styles.Data}>${item.quote.USD.volume_24h.toFixed(0)}</td>
+                  <td className={styles.Data}>${addCommas(item.quote.USD.volume_24h.toFixed(0))}</td>
 
                   <td className={styles.Data}>
-                    {item.total_supply.toFixed(0)} {item.symbol}
+                    {addCommas(item.total_supply.toFixed(0))} {item.symbol}
                   </td>
                 </tr>
               );
