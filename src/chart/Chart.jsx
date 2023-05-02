@@ -5,7 +5,7 @@ import useIntervaledFetch from "../hooks/useIntervaledFetch";
 export default function Chart() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const API_ENDPOINT =
-    "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=1";
 
   const options = {
     headers: {
@@ -19,6 +19,10 @@ export default function Chart() {
 
   if (!data) {
     return <div>Loading...</div>;
+  }
+
+  function removeDash(str) {
+    return str.replace(/-/g, '');
   }
 
   return (
@@ -102,19 +106,19 @@ export default function Chart() {
 
                   <td className={`${styles.Data} ${class1h}`}>
                     <span className={`${class1h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
-                      &nbsp;{item.quote.USD.percent_change_1h.toFixed(2)}%
+                      &nbsp;{removeDash(item.quote.USD.percent_change_1h.toFixed(2))}%
                     </span>
                   </td>
 
                   <td className={`${styles.Data} ${class24h}`}>
                     <span className={`${class24h == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
-                      &nbsp;{item.quote.USD.percent_change_24h.toFixed(2)}%
+                      &nbsp;{removeDash(item.quote.USD.percent_change_24h.toFixed(2))}%
                     </span>
                   </td>
 
                   <td className={`${styles.Data} ${class7d}`}>
                     <span className={`${class7d == styles.Up ? "ion-ios-arrow-up" : "ion-ios-arrow-down"}`}>
-                      &nbsp;{item.quote.USD.percent_change_7d.toFixed(2)}%
+                      &nbsp;{removeDash(item.quote.USD.percent_change_7d.toFixed(2))}%
                     </span>
                   </td>
 
