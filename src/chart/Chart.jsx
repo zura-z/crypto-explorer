@@ -6,18 +6,22 @@ import Body from "./Table/Body";
 
 import styles from "./Chart.module.css";
 
+import useSort from '../hooks/useSort'
+
 export default function Chart() {
   const data = useIntervaledFetch(ENDPOINT_WITH_LIMIT(3), OPTIONS);
+  
+  const [sortedData, handleSort] = useSort(data);
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
   return (
-    <section>
+    <section className={styles.Section}>
       <table className={styles.Table}>
-        <Head />
-        <Body data={data} />
+        <Head sortPrice={() => handleSort("price")} />
+        <Body data={sortedData || data} />
       </table>
     </section>
   );

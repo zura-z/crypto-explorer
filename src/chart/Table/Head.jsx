@@ -1,6 +1,6 @@
 import styles from "../Chart.module.css";
 
-export default function Head() {
+export default function Head({ sortPrice }) {
   return (
     <thead>
       <tr className={`${styles.Row} ${styles.Title}`}>
@@ -14,7 +14,7 @@ export default function Head() {
           Name
         </th>
 
-        <th className={styles.Heading} scope="col">
+        <th className={`${styles.Heading} pointer`} scope="col" onClick={sortPrice}>
           Price
         </th>
 
