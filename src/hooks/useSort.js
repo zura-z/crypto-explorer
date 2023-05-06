@@ -6,15 +6,20 @@ export default function useSort(data) {
 
   const sortBy = (key) => {
     return (a, b) => {
+      const keys = key.split(".");
       let valueA = a;
       let valueB = b;
-      const keys = key.split(".");
       for (const k of keys) {
         valueA = valueA[k];
         valueB = valueB[k];
       }
-      const diff = valueA - valueB;
-      return ascendingOrder ? diff : -diff;
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        const diff = valueA.localeCompare(valueB);
+        return ascendingOrder ? diff : -diff;
+      } else {
+        const diff = valueA - valueB;
+        return ascendingOrder ? diff : -diff;
+      }
     };
   };
 
