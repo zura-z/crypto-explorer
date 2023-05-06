@@ -1,5 +1,15 @@
-.Table {
-  min-width: 75%;
+:root {
+  --table-padding: 1em;
+}
+
+.Section {
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  min-width: 70%;
+
+  margin: 0 auto;
 }
 
 .Heading {
@@ -11,19 +21,21 @@
   border: 0.1px solid var(--line-color);
   border-left: none;
   border-right: none;
+
+  font-weight: 600;
 }
 
-.DataRow:hover{
+.DataRow:hover {
   background-color: var(--background-hover);
 }
 
 .Heading:not(:last-child),
 .Data:not(:last-child) {
-  padding: 1em;
+  padding: var(--table-padding);
 }
 
 .Data:last-child {
-  padding: 1em 1.25em;
+  padding: var(--table-padding) 1.25em;
 }
 
 .Data {
@@ -76,11 +88,86 @@
 }
 
 @keyframes UpToNormal {
-  from {background-color: var(--color-green);}
-  to {background-color: var(--body-color);}
+  from {
+    background-color: var(--color-green);
+  }
+  to {
+    background-color: var(--body-color);
+  }
 }
 
 @keyframes DownToNormal {
-  from {background-color: var(--color-red);}
-  to {background-color: var(--body-color);}
+  from {
+    background-color: var(--color-red);
+  }
+  to {
+    background-color: var(--body-color);
+  }
+}
+
+.Rows {
+  margin-bottom: 2em;
+  margin-right: var(--table-padding);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+
+  position: relative;
+}
+
+.Button {
+  background-color: rgb(43, 43, 81);
+  padding: 0.1em 0;
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  width: 3.5em;
+}
+
+.Rows ul {
+  position: absolute;
+
+  top: 1.75em;
+  background-color: rgb(30, 30, 56);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 4em;
+
+  border-radius: 7px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+  z-index: 3;
+}
+
+.Rows ul li {
+  padding: 0.25em 0;
+}
+
+.Rows ul li:nth-child(1) {
+  margin: 0.5em 0;
+}
+
+.Rows ul li:last-child {
+  margin: 0.5em 0;
+}
+
+.Rows ul li {
+  width: 3em;
+  text-align: center;
+  border-radius: 2px;
+
+  transition: var(--transition);
+}
+
+.Rows ul li:hover {
+  background-color: rgb(43, 43, 81);
 }

@@ -7,7 +7,7 @@ import Body from "./Table/Body";
 import styles from "./Chart.module.css";
 
 import useSort from "../hooks/useSort";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Chart() {
   const [showRowsSelect, setShowRowsSelect] = useState(false);
@@ -21,20 +21,37 @@ export default function Chart() {
     setShowRowsSelect(!showRowsSelect);
   };
 
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setShowRowsSelect(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [selectRef]);
+
+
   if (!data) {
     return <div>Loading...</div>;
   }
 
   return (
-    <section className={styles.Section}>
-      <div className={styles.Rows}>
+    <section  className={styles.Section}>
+      <div ref={selectRef} className={styles.Rows}>
         Show rows{" "}
         <div className={styles.Button} onClick={handleRowsSelect}>
-          <div className="flex">{rows}<span className="ion-ios-arrow-down" /></div>
+          <div ref={selectRef} className="flex">{rows}<span className="ion-ios-arrow-down" /></div>
 
           {showRowsSelect && (
             <ul>
-              <li onClick={() => setRows(20)}>20</li>
+              <li onClick={() => setRows(2)}>2</li>
               <li onClick={() => setRows(50)}>50</li>
               <li onClick={() => setRows(100)}>100</li>
             </ul>

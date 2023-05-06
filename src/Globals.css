@@ -99,3 +99,8 @@ body.active {
 
 /* Reusables */
 .pointer { cursor: pointer }
+
+.flex {
+  display: flex;
+  gap: 0.25em;
+}
