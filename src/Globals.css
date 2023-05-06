@@ -96,3 +96,6 @@ body.active {
 ::-webkit-scrollbar-thumb:hover {
   background-color: hsl(220, 5%, 30%);
 }
+
+/* Reusables */
+.pointer { cursor: pointer }

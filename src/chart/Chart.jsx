@@ -9,7 +9,7 @@ import styles from "./Chart.module.css";
 import useSort from '../hooks/useSort'
 
 export default function Chart() {
-  const data = useIntervaledFetch(ENDPOINT_WITH_LIMIT(3), OPTIONS);
+  const data = useIntervaledFetch(ENDPOINT_WITH_LIMIT(30), OPTIONS);
   
   const [sortedData, handleSort] = useSort(data);
 
@@ -20,7 +20,7 @@ export default function Chart() {
   return (
     <section className={styles.Section}>
       <table className={styles.Table}>
-        <Head sortPrice={() => handleSort("price")} />
+        <Head handleSort={handleSort} />
         <Body data={sortedData || data} />
       </table>
     </section>
