@@ -12,6 +12,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Chart() {
   const [showRowsSelect, setShowRowsSelect] = useState(false);
   const [rows, setRows] = useState(100);
+  const [dataKey, setDataKey] = useState("");
 
   const data = useIntervaledFetch(ENDPOINT_WITH_LIMIT(rows), OPTIONS);
 
@@ -37,6 +38,9 @@ export default function Chart() {
     };
   }, [selectRef]);
 
+  useEffect(() => {
+    setDataKey(`${rows}-${data?.length || 0}`);
+  }, [rows, data]);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -51,7 +55,7 @@ export default function Chart() {
 
           {showRowsSelect && (
             <ul>
-              <li onClick={() => setRows(2)}>2</li>
+              <li onClick={() => setRows(20)}>20</li>
               <li onClick={() => setRows(50)}>50</li>
               <li onClick={() => setRows(100)}>100</li>
             </ul>
@@ -61,7 +65,7 @@ export default function Chart() {
 
       <table className={styles.Table}>
         <Head handleSort={handleSort} />
-        <Body data={sortedData || data} />
+        <Body key={dataKey} data={sortedData || data} />
       </table>
     </section>
   );
