@@ -5,12 +5,16 @@ import { ENDPOINT_WITH_COIN_SYMBOL, OPTIONS } from "./../../API_SETTINGS";
 import { useEffect, useState } from "react";
 
 export default function CoinPage() {
+  const [error, setError] = useState("");
+
   const { slug } = useParams();
 
   const data = useIntervaledFetch(ENDPOINT_WITH_COIN_SYMBOL(slug), OPTIONS);
   const [iterableData, setItarableData] = useState(null);
 
   useEffect(() => {
+    setError("");
+
     const coin = data?.data;
 
     if (coin) {
@@ -21,6 +25,8 @@ export default function CoinPage() {
       setItarableData(result);
       return;
     }
+
+    setError("Coin Not Found");
   }, [data]);
 
   return (
@@ -38,6 +44,8 @@ export default function CoinPage() {
           </>
         );
       })}
+
+      {error}
     </div>
   );
 }
