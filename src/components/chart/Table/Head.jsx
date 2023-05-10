@@ -1,8 +1,6 @@
 import styles from "../Chart.module.css";
 
-
 export default function Head({ handleSort }) {
-
   return (
     <thead>
       <tr className={`${styles.Row} ${styles.Title}`}>

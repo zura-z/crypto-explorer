@@ -1,7 +1,8 @@
 import styles from "../Chart.module.css";
 
-import { addCommas } from "../../functions/addCommas";
-import { removeDash } from "../../functions/removeDash";
+import { addCommas } from "../../../functions/addCommas";
+import { removeDash } from "../../../functions/removeDash";
+import { Link } from "react-router-dom";
 
 export default function Body({ data }) {
   return (
@@ -24,9 +25,9 @@ export default function Body({ data }) {
               </td>
 
               <td className={styles.Data}>
-                <a href="#" className={styles.CoinName}>
+                <Link to={`/${item.slug}`} className={styles.CoinName}>
                   {item.name} <span className={styles.Symbol}>{item.symbol}</span>
-                </a>
+                </Link>
               </td>
 
               <td className={styles.Data}>

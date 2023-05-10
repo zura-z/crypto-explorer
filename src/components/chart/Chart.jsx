@@ -1,17 +1,19 @@
-import useIntervaledFetch from "../hooks/useIntervaledFetch";
-import { ENDPOINT_WITH_LIMIT, OPTIONS } from "./API_SETTINGS";
+import useIntervaledFetch from "../../hooks/useIntervaledFetch";
+import useSort from "../../hooks/useSort";
+
+import { ENDPOINT_WITH_LIMIT, OPTIONS } from "./../../API_SETTINGS";
 
 import Head from "./Table/Head";
 import Body from "./Table/Body";
 
 import styles from "./Chart.module.css";
 
-import useSort from "../hooks/useSort";
 import { useState, useEffect, useRef } from "react";
 
 export default function Chart() {
   const [showRowsSelect, setShowRowsSelect] = useState(false);
-  const [rows, setRows] = useState(100);
+  const [rows, setRows] = useState(2);
+
   const [dataKey, setDataKey] = useState("");
 
   const data = useIntervaledFetch(ENDPOINT_WITH_LIMIT(rows), OPTIONS);
@@ -31,10 +33,10 @@ export default function Chart() {
       }
     }
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", (e) => handleClickOutside(e));
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", (e) => handleClickOutside(e));
     };
   }, [selectRef]);
 
@@ -47,11 +49,14 @@ export default function Chart() {
   }
 
   return (
-    <section  className={styles.Section}>
-      <div ref={selectRef} className={styles.Rows}>
+    <section className={styles.Section}>
+      <div className={styles.TopOptions}>
         Show rows{" "}
-        <div className={styles.Button} onClick={handleRowsSelect}>
-          <div ref={selectRef} className="flex">{rows}<span className="ion-ios-arrow-down" /></div>
+        <div ref={selectRef} className={styles.Button} onClick={handleRowsSelect}>
+          <div className="flex">
+            {rows}
+            <span className="ion-ios-arrow-down" />
+          </div>
 
           {showRowsSelect && (
             <ul>
